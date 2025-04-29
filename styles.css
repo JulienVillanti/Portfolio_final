@@ -140,5 +140,758 @@ body {
 .hamburger-menu {
   display: none;
   background: none;
-  
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80vh;
+  position: relative;
+  padding-top: 3rem;
+  overflow: hidden;
+}
+
+.content {
+  max-width: 500px;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: var(--dark-color);
+}
+
+.animate-text {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}
+
+.brief-description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--gray-color);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.arrow {
+  margin-left: 0.5rem;
+  transition: var(--transition);
+}
+
+.btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+.hero-image {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.profile-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Wave Animation */
+.design {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  top: 20%;
+  right: -10%;
+  width: 800px;
+  height: 800px;
+  background-color: var(--primary-color);
+  border-radius: 45% 50% 50% 45%;
+  transform-origin: center center;
+  opacity: 0.15;
+}
+
+.wave-1 {
+  animation: wave 20s linear infinite;
+}
+
+.wave-2 {
+  background-color: var(--secondary-color);
+  width: 700px;
+  height: 700px;
+  animation: wave 15s linear infinite;
+  opacity: 0.1;
+}
+
+.wave-3 {
+  background-color: var(--primary-color);
+  width: 600px;
+  height: 600px;
+  animation: wave 10s linear infinite;
+  opacity: 0.05;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Section styling */
+.section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  color: var(--dark-color);
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+/* About Section */
+.about-content {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  color: var(--gray-color);
+  font-size: 1.1rem;
+}
+
+.about-image {
+  background-color: var(--light-gray);
+  border-radius: 10px;
+  height: 300px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Skills Section */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.skill-category h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 2rem;
+}
+
+.skill-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition);
+  cursor: default;
+}
+
+.skill-badge:hover {
+  transform: translateY(-10px);
+}
+
+.skill-logo {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.skill-badge:hover .skill-logo {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.skill-logo i {
+  font-size: 3rem;
+}
+
+.skill-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--gray-color);
+  transition: var(--transition);
+}
+
+.skill-badge:hover .skill-name {
+  color: var(--primary-color);
+}
+
+/* Projects Section */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--light-gray);
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(var(--primary-color-rgb), 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.project-image:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-link {
+  color: white;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 500;
+  border: 2px solid white;
+  transition: var(--transition);
+}
+
+.project-link:hover {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.project-info {
+  padding: 1.5rem;
+}
+
+.project-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--dark-color);
+}
+
+.project-info p {
+  color: var(--gray-color);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tags span {
+  background-color: var(--light-gray);
+  padding: 0.3rem 0.75rem;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  color: var(--gray-color);
+  transition: var(--transition);
+}
+
+.project-card:hover .project-tags span {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+}
+
+/* GameBoy Contact Form */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+.gameboy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.gameboy {
+  background-color: #94b0ca;
+  width: 350px;
+  border-radius: 10px 10px 60px 10px;
+  padding: 20px 20px 60px;
+  box-shadow: inset -8px -8px 0px 0px rgba(0, 0, 0, 0.2),
+    0 15px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transform: perspective(500px) rotateX(5deg);
+}
+
+.gameboy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #798ea9;
+  border-radius: 10px 10px 0 0;
+  z-index: 0;
+}
+
+.gameboy-screen {
+  background-color: #97a979;
+  border-radius: 5px;
+  padding: 30px 15px;
+  margin-bottom: 30px;
+  position: relative;
+  border: 10px solid #3e3e3e;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.gameboy-screen::before {
+  content: "Nintendo GAME BOY";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Courier New", monospace;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #3e3e3e;
+  white-space: nowrap;
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gameboy-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.d-pad {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.d-pad-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+  background-color: #333;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.d-pad-up,
+.d-pad-right,
+.d-pad-down,
+.d-pad-left {
+  position: absolute;
+  background-color: #333;
+  border-radius: 3px;
+}
+
+.d-pad-up,
+.d-pad-down {
+  width: 26px;
+  height: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.d-pad-left,
+.d-pad-right {
+  width: 26px;
+  height: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.d-pad-up {
+  top: 0;
+}
+
+.d-pad-right {
+  right: 0;
+}
+
+.d-pad-down {
+  bottom: 0;
+}
+
+.d-pad-left {
+  left: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-a,
+.btn-b {
+  width: 35px;
+  height: 35px;
+  background-color: #a93642;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.start-select {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+}
+
+.btn-start,
+.btn-select {
+  width: 60px;
+  height: 15px;
+  background-color: #333;
+  border-radius: 20px;
+  transform: rotate(-25deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: #94b0ca;
+}
+
+/* Form inside gameboy */
+.gameboy .form-group {
+  margin-bottom: 0.8rem;
+}
+
+.gameboy .form-group input,
+.gameboy .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #566c49;
+  border-radius: 3px;
+  background-color: #a2b595;
+  color: #333;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.gameboy .form-group input::placeholder,
+.gameboy .form-group textarea::placeholder {
+  color: #566c49;
+}
+
+.gameboy .submit-button {
+  background-color: #333;
+  color: #a2b595;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+}
+
+.gameboy .submit-button:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact info */
+.contact-info p {
+  color: var(--gray-color);
+  margin-bottom: 2rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.contact-item a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact-item a:hover {
+  color: var(--secondary-color);
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-links a {
+  color: white;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  main {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 0;
+    min-height: auto;
+  }
+
+  .content {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--dark-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.3s ease;
+    align-items: center;
+  }
+
+  .nav-links.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .climbing-hold {
+    width: 80%;
+    height: 60px;
+    margin: 0.5rem 0;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .profile-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .gameboy-container {
+    order: 2;
+  }
+
+  .contact-info {
+    order: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .gameboy {
+    width: 300px;
+    transform: none;
+  }
 }

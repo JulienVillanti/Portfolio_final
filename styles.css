@@ -96,8 +96,40 @@ body {
 }
 
 .nav-links li:nth-child(1) .climbing-hold {
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
+  /* TEST */
+  /* border-radius: 8px;
+  height: 45px;
+  transform: perspective(300px) rotateX(10deg);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), inset 0 -4px 0 rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2); /* Red */
 }
+
+/* .nav-links li:nth-child(1) .climbing-hold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+        circle at 30% 20%,
+        rgba(255, 255, 255, 0.2) 2px,
+        transparent 3px
+      )
+      0 0/10px 10px,
+    radial-gradient(
+        circle at 70% 50%,
+        rgba(255, 255, 255, 0.2) 2px,
+        transparent 3px
+      )
+      0 0/10px 10px;
+  opacity: 0.5;
+  border-radius: 8px;
+  z-index: 1;
+} */
+
+/* END TEST */
 
 .nav-links li:nth-child(2) .climbing-hold {
   background-color: #ff9800; /* Orange */
@@ -610,7 +642,7 @@ h2::after {
 }
 
 .gameboy::before {
-  content: "GAME BOY";
+  content: "";
   position: absolute;
   top: 8px;
   left: 50%;
@@ -1085,12 +1117,74 @@ footer {
   .about-content {
     grid-template-columns: 1fr;
   }
+
+  /* CONTACT SECTION CENTERING */
+  .contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .contact-info {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-info p {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .contact-label {
+    margin-bottom: 0.3rem;
+    text-align: center;
+  }
+
+  .contact-item a {
+    text-align: center;
+    word-break: break-word; /* More universal than break-all */
+  }
+
+  /* Ensure gameboy stays centered */
+  .gameboy-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
   .wave {
     top: 70%;
     right: -60%;
+  }
+
+  .contact-info {
+    padding: 0 1rem;
+  }
+
+  .contact-item {
+    max-width: 100%;
   }
 
   .contact-info p {
@@ -1103,6 +1197,10 @@ footer {
 
   .contact-item a {
     font-size: 0.85rem;
+  }
+
+  .contact-details {
+    align-items: center;
   }
 
   .gameboy {

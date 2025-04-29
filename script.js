@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // toggle for mobile navigation
+    // Navigation toggle for mobile
     const burgerMenu = document.getElementById('burger-menu');
     const navLinks = document.getElementById('nav-links');
     const navItems = document.querySelectorAll('.climbing-hold');
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (burgerMenu) {
         burgerMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
 
             // Toggle hamburger icon
             const icon = burgerMenu.querySelector('i');
@@ -20,13 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile menu closing when link is clicked
+    // Close mobile menu when a link is clicked
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             if (navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
-                // Hamburger icon reset
+                document.body.classList.remove('menu-open');
 
+                // Reset hamburger icon
                 const icon = burgerMenu.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
@@ -34,10 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Climbing effects on click
-    const climbingHolds = document.querySelectorAll('.climbing-hold');
-
-    climbingHolds.forEach(hold => {
+    // Climbing hold click effect
+    navItems.forEach(hold => {
         hold.addEventListener('mousedown', () => {
             hold.style.transform = 'translateY(2px) scale(0.98)';
             hold.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         hold.addEventListener('mouseup', () => {
             if (hold.classList.contains('active')) {
-                hold.style.transform = 'translateY(-3px) scale(0.98)';
+                hold.style.transform = 'translateY(-3px)';
                 hold.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.3)';
             } else {
                 hold.style.transform = '';
@@ -61,7 +61,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Gameboy buttons effects
+    // Fix for mobile devices (touch events)
+    navItems.forEach(hold => {
+        hold.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            hold.style.transform = 'translateY(2px) scale(0.98)';
+            hold.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
+        });
+
+        hold.addEventListener('touchend', () => {
+            if (hold.classList.contains('active')) {
+                hold.style.transform = 'translateY(-3px)';
+                hold.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.3)';
+            } else {
+                hold.style.transform = '';
+                hold.style.boxShadow = '';
+            }
+
+            // This simulates a click for accessibility
+            hold.click();
+        });
+    });
+
+    // GameBoy button press effects
     const gameButtons = document.querySelectorAll('.btn-a, .btn-b, .btn-start, .btn-select, .d-pad-up, .d-pad-right, .d-pad-down, .d-pad-left');
 
     gameButtons.forEach(button => {
@@ -81,66 +103,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Add a class to body when scrolled
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+    });
 
-    // Active navigation state on scroll
+    // Improved active navigation state on scroll
     const sections = document.querySelectorAll('section');
 
-    window.addEventListener('scroll', () => {
-        let current = '';
+    function updateActiveNav() {
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+        // Find the current section
+        let currentSection = null;
+        let minDistance = Infinity;
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const distance = Math.abs(scrollPosition - (sectionTop + sectionHeight / 2));
 
-            if (pageYOffset >= sectionTop) {
-                current = section.getAttribute('id');
+            if (distance < minDistance) {
+                minDistance = distance;
+                currentSection = section;
             }
         });
 
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${current}`) {
-                item.classList.add('active');
-            }
-        });
-    });
+        // Check for bottom of page
+        const bottomOfPage = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100;
 
-    // Animate skill badges on scroll
-    const skillBadges = document.querySelectorAll('.skill-badge');
+        // Set active nav item
+        if (bottomOfPage) {
+            // If we're at the bottom, highlight the contact section
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#contact') {
+                    item.classList.add('active');
+                }
+            });
+        } else if (currentSection) {
+            const currentId = currentSection.getAttribute('id');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${currentId}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    }
 
-    const isInViewport = (element) => {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    };
+    window.addEventListener('scroll', updateActiveNav);
+    window.addEventListener('resize', updateActiveNav);
 
-    // Add entrance animation for skill badges
-    skillBadges.forEach((badge, index) => {
-        // Set initial state
-        badge.style.opacity = '0';
-        badge.style.transform = 'translateY(20px)';
-
-        // Animate badges when they come into view with a staggered delay
-        const animateSkillBadges = () => {
-            if (isInViewport(badge)) {
-                setTimeout(() => {
-                    badge.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    badge.style.opacity = '1';
-                    badge.style.transform = 'translateY(0)';
-                }, index * 100); // Staggered delay based on index
-                window.removeEventListener('scroll', animateSkillBadges);
-            }
-        };
-
-        window.addEventListener('scroll', animateSkillBadges);
-        // Check on page load for visible badges
-        setTimeout(() => {
-            animateSkillBadges();
-        }, 300);
-    });
+    // Call it once on page load
+    setTimeout(updateActiveNav, 100);
 
     // Type animation for hero section
     const animateText = document.querySelector('.animate-text');
@@ -172,51 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            // Validate form
-            if (isFormValid(name, email, message)) {
-                // You would typically send this data to a server
-                // For now, we'll just show a success message and reset the form
-                console.log('Form submitted:', { name, email, message });
-
-                // Reset form
-                contactForm.reset();
-
-                // Show success message
-                alert('Thank you for your message! I will get back to you soon.');
-            }
-        });
-    }
-
-    // Form validation
-    function isFormValid(name, email, message) {
-        // Check if fields are empty
-        if (!name.trim() || !email.trim() || !message.trim()) {
-            alert('Please fill out all fields before submitting.');
-            return false;
-        }
-
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
-            return false;
-        }
-
-        return true;
-    }
-
     // Smooth scroll for nav links
     const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
 
@@ -229,11 +204,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80,
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
+
+                // Update active class manually
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
             }
         });
     });
+
+    // Form submission for GameBoy
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Basic validation
+            if (!name || !email || !message) {
+                alert('Please fill out all fields');
+                return;
+            }
+
+            // For now, just log and show success message
+            console.log('Form submitted:', { name, email, message });
+            alert('Thank you for your message! I will get back to you soon.');
+
+            // Reset form
+            contactForm.reset();
+        });
+    }
 });

@@ -85,7 +85,6 @@ body {
   text-decoration: none;
   width: 90px;
   height: 50px;
-  background-color: #f44336;
   border-radius: 15px;
   color: white;
   font-weight: 600;
@@ -96,19 +95,19 @@ body {
   overflow: hidden;
 }
 
-.climbing-hold:nth-of-type(1) {
+.nav-links li:nth-child(1) .climbing-hold {
   background-color: #f44336; /* Red */
 }
 
-.climbing-hold:nth-of-type(2) {
+.nav-links li:nth-child(2) .climbing-hold {
   background-color: #ff9800; /* Orange */
 }
 
-.climbing-hold:nth-of-type(3) {
+.nav-links li:nth-child(3) .climbing-hold {
   background-color: #2196f3; /* Blue */
 }
 
-.climbing-hold:nth-of-type(4) {
+.nav-links li:nth-child(4) .climbing-hold {
   background-color: #4caf50; /* Green */
 }
 
